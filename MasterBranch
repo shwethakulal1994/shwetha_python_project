@@ -1,0 +1,32 @@
+from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
+from time import sleep
+import HtmlTestRunner
+from selenium.webdriver.common.keys import Keys
+# import openpyexcel
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import unittest
+class OrangeHRMLogin() :
+    def __init__( self, driver):
+        self.driver = driver
+
+    def test_homePageTitle( self ):
+        self.assertTrue(self.driver.title == "OrangeHRM")
+        sleep (20)
+        print (self.driver.title)
+
+    def test_login(self,user2,Password2 ):
+        #self.driver.get ("https://opensource-demo.orangehrmlive.com/")
+        self.driver.find_element (self.By.ID, 'txtUsername').send_keys (self.user2)
+        self.driver.find_element (self.By.ID, 'txtPassword').send_keys (self.Password2)
+        self.driver.find_element (self.By.ID, 'btnLogin').click ()
+        self.assertIn(self.driver.title == "OrangeHRM")
+
+    @classmethod
+    def tearDownClass( cls ):
+        cls.driver.close ()
+
+
+if __name__ == "__main__":
+    unittest.main (testRunner=HtmlTestRunner.HTMLTestRunner ( output='Reports'))
+
